@@ -1,0 +1,11 @@
+<h1> There are {{word}} words in the list</h1>
+
+<h1>==> Your Words </h1>
+{{fulltext}}
+
+<h1>Frequency of Words </h1>
+{% for key, value in worddictionary %}
+    
+    {{key}} --  {{value}}<br />
+    
+{% endfor %}
