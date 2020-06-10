@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+      {% load staticfiles %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -48,28 +49,24 @@
   </head>
   <body>
     <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Prabhanshu</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{%  url 'home' %}">Prabhanshu</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <li class="nav-item active ml-auto">
-        <a class="nav-link" href="#">Twitter <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="http://www.twitter.com/home">Twitter <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Resume</a>
+        <a class="nav-link" href="{% static 'resume.pdf' %}">Resume</a>
       </li>
          <li class="nav-item">
-        <a class="nav-link" active href="#" active>Blog</a>
+        <a class="nav-link" href="{%url 'allblogs'%}">Blog</a>
       </li>
         
-        </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+   
   </div>
 </nav>
 </header>
@@ -82,6 +79,19 @@
     <br />
     <h2>latest Blogs</h2>
         <hr/>
+        
+    {% for blog in blog.all %}
+        
+        <a href="{% url 'detail' blog.id %}"><h4>{{blog.title}}</h4></a>
+        
+        {{blog.pub_date_pretty}}
+        <br />
+        {{blog.summary}}...
+        
+        <br /><br />
+        <img  src="{{blog.image.url}}"  height =200 widht =200 />
+        {% endfor%}
+        
     </div>
     
 </main>
